@@ -19,9 +19,22 @@ public class TestApi {
 		// 원인 1. abstract class 2. 생성자 접근제한자 protected
 		
 		// 해결 1
-		Calendar c = new GregorianCalendar();   //Cannot instantiate the type Calendar(오류메세지) // abstract
+		Calendar c = new GregorianCalendar();   // 하나만 만들어놓고 써라. new를 만들지 못하도록 한다.
 		// 해결 2 - Singleton
-		Calendar c2 = Calendar.getInstance();
+		Calendar c2 = Calendar.getInstance();	//이런 애들은 getInstance를 꼭 써야한다.
+		
+		
+		TestSingleton ts = TestSingleton.getInstance();
+		System.out.println(ts.getA());
+		ts.setA(50);
+		System.out.println(ts.getA());
+		
+		TestSingleton ts2 = TestSingleton.getInstance();
+		System.out.println(ts2.getA());
+		ts2.setA(100);
+		System.out.println(ts2.getA());		
+		
+		
 		
 		
 		System.out.println(c.getTime());
@@ -54,8 +67,6 @@ public class TestApi {
 			}
 		}
 
-		
-
 //		while(true) {
 //		System.out.println("메뉴 1-5 사이 선택해주세요");
 //		int menu = sc.nextInt();
@@ -72,7 +83,8 @@ public class TestApi {
 //		}
 //		System.out.println("testWrapperDoWhile 끝");
 //	}
-//
+
+	
 	public void testString() {
 		StringBuffer str1 = new StringBuffer("aaa");
 		StringBuffer str2 = new StringBuffer();
