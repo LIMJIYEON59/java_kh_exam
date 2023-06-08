@@ -24,7 +24,7 @@ public class MusicView {
 //		9. 종료 // “종료” 출력 후 main()으로 리턴
 //		메뉴 번호 선택 : >> 입력 받음
 //		// 메뉴 화면 반복 실행 처리
-		int menu = -1;
+		int menu = -1;	//비정상입력 경우를 위한 초기값
 		do{
 			System.out.println("******* 메인 메뉴 *******");
 			System.out.println("1. 마지막 위치에 곡 추가");
@@ -37,6 +37,7 @@ public class MusicView {
 			System.out.println("8. 가수명 내림차순 정렬");
 			System.out.println("9. 종료 ");
 			System.out.println("0. 파일에 저장");
+			System.out.println("10. 파일에서 로딩");
 			System.out.println("메뉴 번호 선택 : >>");
 			String menuStr = sc.nextLine();
 			menu = -1; // 비정상 입력경우를 위한 초기값
@@ -50,7 +51,8 @@ public class MusicView {
 			}
 			//정상 입력경우 (continue 때문에 여기 수행x)
 			switch(menu) {
-			//TODO case 0:			saveFile();			break;
+			case 10:        
+			case 0:			saveFile();			break;
 			case 1:			addList();			break;
 			case 2:			addAtZero();		break;
 			case 3: 		printAll();			break;
@@ -188,7 +190,29 @@ public class MusicView {
 		}
 	}
 	public void saveFile() {
-		//TODO
+		System.out.println("*********곡정보를 파일에 저장**********");
+		System.out.println("저장할 파일경로를 작성해 주세요");
+		String fileName = sc.nextLine();
+		
+		int result = mc.saveFile(fileName);
+		if(result >0) {
+			System.out.println("저장성공");
+		}else {
+			System.out.println("저장 실패");
+		}
+	}
+		public void loadFile() {
+			System.out.println("*********곡정보를 파일에 저장**********");
+			System.out.println("저장할 파일경로를 작성해 주세요");
+			String fileName = sc.nextLine();
+			
+			int result = mc.loadFile(fileName);
+			if(result>0) {
+				System.out.println("로딩 성공");
+			}else {
+				System.out.println("로딩 실패");
+			
+		}
 	}
 }
 	

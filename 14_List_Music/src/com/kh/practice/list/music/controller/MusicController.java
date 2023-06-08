@@ -1,10 +1,13 @@
 package com.kh.practice.list.music.controller;
 
 import java.awt.image.DataBufferDouble;
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,20 +18,22 @@ import com.kh.practice.list.music.model.compare.AscTitle;
 
 public class MusicController {
 	private List<Music> list = new ArrayList<Music>();
-
+	
 	public MusicController() {
+		
+		
 		// list에 초기 곡 10곡 미리 입력해두기
-		list.add(new Music("aa", "aaa"));
-		list.add(new Music("bb", "bbb"));
-		list.add(new Music("cc", "ccc"));
-		list.add(new Music("dd", "ddd"));
-		list.add(new Music("aa", "eee"));
-		list.add(new Music("bb", "fff"));
-		list.add(new Music("dd", "ccc"));
-		list.add(new Music("ee", "ccc"));
-		list.add(new Music("ff", "aaa"));
+//		list.add(new Music("aa", "aaa"));
+//		list.add(new Music("bb", "bbb"));
+//		list.add(new Music("cc", "ccc"));
+//		list.add(new Music("dd", "ddd"));
+//		list.add(new Music("aa", "eee"));
+//		list.add(new Music("bb", "fff"));
+//		list.add(new Music("dd", "ccc"));
+//		list.add(new Music("ee", "ccc"));
+//		list.add(new Music("ff", "aaa"));
+	
 	}
-
 	public int addList(Music music) {
 //		****** 마지막 위치에 곡 추가 ******
 		int result = 0; // 0:추가실패 1:추가성공
@@ -169,55 +174,41 @@ public class MusicController {
 			int result = 0; // 0 :저장실패, 1:저장성공
 			
 			//filePath에 list의 Music 객체들을 저장함	
-			FileOutputStream fos = null;
-			ObjectOutputStream oos = null;
-			BufferedOutputStream bos = null;
-			try {
-				fos = new FileOutputStream(filePath);
-				oos = new ObjectOutputStream(fos);
-				bos = new BufferedOutputStream(oos);
-			} catch (FileNotFoundException e) {
+			try (ObjectOutputStream oos	
+				  = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(filePath)));
+			){
+				oos.writeObject(list);
+				oos.flush();
+				result = 1;
+			}catch (FileNotFoundException e) {
 				e.printStackTrace();
-			} catch (IOException e) {
+			}catch (IOException e) {
 				e.printStackTrace();
-			}finally {
-				try {
-					if(bos != null) bos.close();
-					if(oos != null) oos.close();
-					if(fos != null) fos.close();
-					
+			}
+			return result;
+				
+		}
+		
+			public int loadFile(String filePath) {
+				int result = 0;
+				try (ObjectInputStream ois
+						  = new ObjectInputStream(new BufferedInputStream(new FileInputStream(filePath)));
+					){
+					list = (List<Music>) ois.readObject();
+					System.out.println(list);
+					result = 1;
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
 				}catch (IOException e) {
+					e.printStackTrace();
+				}catch (ClassNotFoundException e) {
 					e.printStackTrace();
 				}
 				
-			}
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-		
-			
-			return result;
+				return result;
 		}
-	}
+}
+
 	
 	
 
