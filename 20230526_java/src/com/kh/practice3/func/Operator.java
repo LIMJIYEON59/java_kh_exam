@@ -48,13 +48,12 @@ public class Operator {
 		Scanner sc2 = new Scanner(System.in); //{ 안열어도됨
 		System.out.print("주민번호를 입력하세요 : ");
 		String num1 = sc2.nextLine();  //숫자를 입력한 순간 성별이 나와야하니깐
+		System.out.println(num1.charAt(7));
 		
-		char gender = num1.charAt(8);
-		
-		if(gender == 1) {
-			System.out.println("남자");
-		}else {
-			System.out.println("여자");
+		if(num1.charAt(7) == '1') {
+			System.out.println("여자"); 
+		} else {
+			System.out.println("남자");	
 		}
 	}
 }

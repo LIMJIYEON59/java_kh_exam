@@ -24,7 +24,7 @@ public class MusicView {
 //		9. 종료 // “종료” 출력 후 main()으로 리턴
 //		메뉴 번호 선택 : >> 입력 받음
 //		// 메뉴 화면 반복 실행 처리
-		int menu = 0;
+		int menu = -1;
 		do{
 			System.out.println("******* 메인 메뉴 *******");
 			System.out.println("1. 마지막 위치에 곡 추가");
@@ -36,9 +36,10 @@ public class MusicView {
 			System.out.println("7. 곡명 오름차순 정렬");
 			System.out.println("8. 가수명 내림차순 정렬");
 			System.out.println("9. 종료 ");
+			System.out.println("0. 파일에 저장");
 			System.out.println("메뉴 번호 선택 : >>");
 			String menuStr = sc.nextLine();
-			menu = 0; // 비정상 입력경우를 위한 초기값
+			menu = -1; // 비정상 입력경우를 위한 초기값
 			try {
 				menu = Integer.parseInt(menuStr);	//사용
 			} catch (NumberFormatException e) {
@@ -49,6 +50,7 @@ public class MusicView {
 			}
 			//정상 입력경우 (continue 때문에 여기 수행x)
 			switch(menu) {
+			//TODO case 0:			saveFile();			break;
 			case 1:			addList();			break;
 			case 2:			addAtZero();		break;
 			case 3: 		printAll();			break;
@@ -147,14 +149,53 @@ public class MusicView {
 	}
 
 	public void setMusic() {
-		//TODO
+		System.out.println("***** 특정 곡 정보 수정 *****");
+		System.out.println("수정할 곡명을 입력해주세요");
+		String title = sc.nextLine();
+		System.out.println("변경할 곡명을 입력해주세요");
+		String newtitle = sc.nextLine();
+		System.out.println("변경할 가수명을 입력해주세요");
+		String newSinger = sc.nextLine();
+		
+		Music result = mc.setMusic(title, new Music(newtitle, newSinger));
+		if(result == null) {
+			System.out.println("수정할 곡이 없습니다.");
+		}else {
+			System.out.printf("000(%s, %s)의 값이 변경되었습니다. \n", result.getTitle(), result.getSinger());
+		}
+		//사용자에게 수정할 곡을 입력 하여 MusicController에 setMusic으로 검색 할 수 있게
 	}
 
 	public void ascTitle() {
-		//TODO
+		System.out.println("*********곡 명 오름차순 정렬**********");
+//		int result = mc.ascTitle();
+		int result = mc.ascTitle2();
+		if(result>0) {
+			System.out.println("정렬 성공");
+		}else {
+			System.out.println("정령 실패");
+		}
 	}
 
 	public void descSinger() {
+		System.out.println("*********가수 명 내림차수 정렬**********");
+//		int result = mc.descSinger();
+		int result = mc.descSinger2();
+		if(result>0) {
+			System.out.println("정렬 성공");
+		}else {
+			System.out.println("정령 실패");
+		}
+	}
+	public void saveFile() {
 		//TODO
 	}
 }
+	
+	
+	
+	
+	
+	
+
+
