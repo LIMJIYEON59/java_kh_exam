@@ -22,11 +22,18 @@ public class BubbleSort {
 
 		int[] arr = new int[] { 3, 2, 5, 1, 6, 8 };
 		System.out.println(Arrays.toString(arr));
+//		for (int i = 0; i < arr.length; i++) {
+//		    ar.append(arr[i]);
+//		    if (i != arr.length - 1) {
+//		        ar.append(" ");
+//		    }
+//		}
+//		System.out.println(sb.toString());
 
 		System.out.print("[");
 		for (int ar : arr) {
 			System.out.print(ar);
-			System.out.print(",");
+			System.out.print(" "); //, 지움
 		}
 		System.out.println("]");
 		for (int i = 0; i < arr.length - 1; i++) {
@@ -45,7 +52,7 @@ public class BubbleSort {
 		System.out.println("================");
 
 		// 버블정렬
-		String[] nameArr = new String[] { "손범준" };
+		String[] nameArr = new String[] { "손범준", "유청하", "박솔빈" };
 		// 배열 ==> List
 		System.out.print("[");
 		for (String ar : nameArr) {
