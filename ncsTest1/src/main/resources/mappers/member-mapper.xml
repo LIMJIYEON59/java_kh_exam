@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="member">
+  <select id="memberResultSet" resultType="memberVo"> <!-- TO DATA -->
+  	SELECT MEMBER_ID, MEMBER_PWD, MEMBER_NM, MEMBER_ENROLL_DT
+  	FROM MEMBER
+  </select>
+  
+  <select id="loginMember" resultType="memberVo">
+  	SELECT MEMBER_ID, MEMBER_PWD, MEMBER_NM, MEMBER_ENROLL_DT
+  	FROM MEMBER
+  	WHERE memberId=#{memberId}
+  </select>
+</mapper>
