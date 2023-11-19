@@ -1,3 +1,3 @@
 # java_kh_exam
-KH 실습 과
+KH 실습 과제
 
